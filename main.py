@@ -253,7 +253,7 @@ async def handle_text_photo(message):
             group_ids = [int(gid) for gid in message.text.split(",") if gid.strip()]
             session_file = f"sessions/session_{user_id}_{user_data[user_id]['selected_phone']}.session"
             async with get_session_lock(session_file):
-                client = TelegramClient(session_file, api_id=API_ID, api_hash=API_HASH, session=SQLiteSession(session_file, timeout=10))
+                client = TelegramClient(session_file, api_id=API_ID, api_hash=API_HASH, session=SQLiteSession(session_file))
                 await client.connect()
                 if not await client.is_user_authorized():
                     await bot.send_message(message.chat.id, "❌ Akkaunt avtorizatsiya qilinmagan.")
